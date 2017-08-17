@@ -10,7 +10,7 @@
   <h1> Bailey's List </h1>
 
   <div>
-    <form action="/" method="post">
+    <form action="/todo" method="post">
       <input type="text" name="newtodo">
       <button type="submit" name="submit">New To-do</button>
     </form>
@@ -18,7 +18,7 @@
     <h2> Incomplete </h2>
     {{#pear}}
       {{^done}}
-      <form action="/" method="post">
+      <form action="/mac/{{id}}" method="post" >
         <button type="submit" name="complete">Mark Complete</button>
         {{text}}
       </form>
