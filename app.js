@@ -1,7 +1,7 @@
 const express = require('express');
 const mustacheExpress = require('mustache-express');
 const bodyParser = require('body-parser');
-const validator = require('express-validator');
+const app = express();
 const data = [{
     "text": "Walk dog",
     "done": true,
@@ -26,11 +26,21 @@ const data = [{
     "text": "Pay electrity bill",
     "done": true,
     id: 4
+  },
+  {
+    "text": "Pay electrity bill",
+    "done": true,
+    id: 4
+  },
+  {
+    "text": "Pay electrity bill",
+    "done": true,
+    id: 4
   }
 ]
 
 
-const app = express();
+// const validator = require('express-validator');
 
 app.engine('mustache', mustacheExpress());
 app.set('views', './views')
@@ -42,18 +52,27 @@ app.use(bodyParser.urlencoded({
   // have to have for this, to send back and forth form data between url
   extended: false
 }));
+// app.use(validator());
 //Gill doesn't know what the true and false part means. false = parses strings and arrays. true = parses nested objects. False is the default
-
 
 app.get('/', function(req, res) {
 
-  res.render('list', {
-    pear: data
-  });
+  res.render('list', {"data": data});
 })
 // only need second part "pear: data" if you are passing data from this doc to the mustache file
 
 app.post("/todo", function(req, res) {
+
+  // req.checkBody('/todo', 'Please do not leave todos form blank').notEmpty();
+  //
+  // let error = req.validationErrors();
+  // console.log(error);
+  //
+  // if(error) {
+  //   let errorMessage = error;
+  //   res.send(errorMessage);
+  // } else{
+
   let add = req.body.newtodo;
   let max = 0;
   for (var i = 0; i < data.length; i++) {
@@ -69,8 +88,9 @@ app.post("/todo", function(req, res) {
   };
   data.push(todo);
 
-
   res.redirect('/');
+
+// }
 })
 
 app.post("/mac/:id", function(req, res) {
@@ -85,13 +105,7 @@ app.post("/mac/:id", function(req, res) {
   }
   // console.log(move);
 
-
-
-
-
-  res.render('list', {
-    pear: data
-  });
+  res.render('list', {"data":data});
 })
 
 app.listen(3000, function() {

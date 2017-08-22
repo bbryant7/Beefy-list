@@ -16,7 +16,7 @@
     </form>
 
     <h2> Incomplete </h2>
-    {{#pear}}
+    {{#data}}
       {{^done}}
       <form action="/mac/{{id}}" method="post" >
         <button type="submit" name="complete">Mark Complete</button>
@@ -24,18 +24,18 @@
       </form>
           <br>
           {{/done}}
-    {{/pear}}
+    {{/data}}
     </div>
 
     <h2> Completed </h2>
-    {{#pear}}
+    {{#data}}
       {{#done}}
         <div>
         {{text}}
         </div>
             <br>
       {{/done}}
-    {{/pear}}
+    {{/data}}
 
 
 </body>
